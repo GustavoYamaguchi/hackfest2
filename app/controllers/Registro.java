@@ -42,11 +42,11 @@ public class Registro extends Controller {
         }
        
         private static boolean emailEmUso(String email){
-                Participante participante = (Participante) dao.findByAttributeName(
+               /* Participante participante = (Participante) dao.findByAttributeName(
                         "Participante", "email", usuario.getEmail()).get(0);
                 if(participante.getEmail().equals(email)){
                         return true;
-                }
+                }*/
                 return false;
         }
 }
