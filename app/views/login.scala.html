@@ -1,4 +1,4 @@
-@(form:Form[Usuario])
+@(form:Form[Participante])
 
 <html>
     <head>
@@ -31,8 +31,8 @@
 			   		<p class="bg-danger" style="">
 			        	@flash.get("fail")
 					</p>
-					}
-					@helper.form(routes.Login.authenticate()) {
+			}
+			@helper.form(routes.Login.authenticate()) {
 					  	 <h1 class="text-center">LogIn</h1>
 					       <p>
 						       <input type="email" name="email" placeholder="Email" value='@form("email").value'
@@ -45,7 +45,7 @@
 						       <button class="btn btn-primary" type="submit">Login</button>
 						       <a class="btn btn-info" style="float:right;" href="/registrar"> Registrar</a>
 					       </div>
-					}
+			}
 			</div>
 		</div>
 	</div>

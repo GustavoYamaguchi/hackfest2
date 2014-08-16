@@ -163,26 +163,26 @@ public class Application extends Controller {
 	private static void criarParticipacoesFake(List<Evento> eventos) {
 		Random rnd = new Random();
 		try {
-			criarParticipacao(new Participante("Alberto Leça", "alberto_leca@mail.com", eventos.get(rnd.nextInt(3))));
-			criarParticipacao(new Participante("Alberto Leça", "alberto_leca@mail.com", eventos.get(rnd.nextInt(3))));
-			criarParticipacao(new Participante("Alberto Leça", "alberto_leca@mail.com", eventos.get(rnd.nextInt(3))));
-			criarParticipacao(new Participante("Belmifer Linares", "belmifer_linares@mail.com", eventos.get(rnd.nextInt(3))));
-			criarParticipacao(new Participante("Belmifer Linares", "belmifer_linares@mail.com", eventos.get(rnd.nextInt(3))));
-			criarParticipacao(new Participante("Célia Rúa", "celia_rua@mail.com", eventos.get(rnd.nextInt(3))));
-			criarParticipacao(new Participante("Deolindo Castello Branco", "deolindo_castello@mail.com", eventos.get(rnd.nextInt(3))));
-			criarParticipacao(new Participante("Doroteia Pasos", "doroteia_passos@mail.com", eventos.get(rnd.nextInt(3))));
-			criarParticipacao(new Participante("Eugénio Palhares", "eugenio_palhares@mail.com", eventos.get(rnd.nextInt(3))));
-			criarParticipacao(new Participante("Fausto Furtado", "fausto_furtado@mail.com", eventos.get(rnd.nextInt(3))));
-			criarParticipacao(new Participante("Filipa Leiria", "filipa_leiria@mail.com", eventos.get(rnd.nextInt(3))));
-			criarParticipacao(new Participante("Leonilde Figueiredo", "leonilde_figueiredo@mail.com", eventos.get(rnd.nextInt(3))));
-			criarParticipacao(new Participante("Pascoal Caldeira", "pascoal_caldeira@mail.com", eventos.get(rnd.nextInt(3))));
-			criarParticipacao(new Participante("Paula Lousado", "paula_lousado@mail.com", eventos.get(rnd.nextInt(3))));
-			criarParticipacao(new Participante("Quitério Galindo","quiterio_galindo@mail.com", eventos.get(rnd.nextInt(3))));
-			criarParticipacao(new Participante("Rosa Varejão", "rosa_varejao@mail.com", eventos.get(rnd.nextInt(3))));
-			criarParticipacao(new Participante("Sonia Gabeira", "sonia_gabeira@mail.com", eventos.get(rnd.nextInt(3))));
-			criarParticipacao(new Participante("Érico Albuquerque", "erico_albuquerque@mail.com", eventos.get(rnd.nextInt(3))));
-			criarParticipacao(new Participante("Érico Albuquerque", "erico_albuquerque@mail.com", eventos.get(rnd.nextInt(3))));
-			criarParticipacao(new Participante("Tairine Reis", "tairine_reis@mail.com", eventos.get(rnd.nextInt(3))));
+			criarParticipacao(new Participante("Alberto Leça", "alberto_leca@mail.com", "a", eventos.get(rnd.nextInt(3))));
+			criarParticipacao(new Participante("Alberto Leça", "alberto_leca@mail.com", "a",eventos.get(rnd.nextInt(3))));
+			criarParticipacao(new Participante("Alberto Leça", "alberto_leca@mail.com", "a",  eventos.get(rnd.nextInt(3))));
+			criarParticipacao(new Participante("Belmifer Linares", "belmifer_linares@mail.com", "a",  eventos.get(rnd.nextInt(3))));
+			criarParticipacao(new Participante("Belmifer Linares", "belmifer_linares@mail.com", "a",  eventos.get(rnd.nextInt(3))));
+			criarParticipacao(new Participante("Célia Rúa", "celia_rua@mail.com", "a",  eventos.get(rnd.nextInt(3))));
+			criarParticipacao(new Participante("Deolindo Castello Branco", "deolindo_castello@mail.com", "a",  eventos.get(rnd.nextInt(3))));
+			criarParticipacao(new Participante("Doroteia Pasos", "doroteia_passos@mail.com", "a",  eventos.get(rnd.nextInt(3))));
+			criarParticipacao(new Participante("Eugénio Palhares", "eugenio_palhares@mail.com", "a",  eventos.get(rnd.nextInt(3))));
+			criarParticipacao(new Participante("Fausto Furtado", "fausto_furtado@mail.com", "a",  eventos.get(rnd.nextInt(3))));
+			criarParticipacao(new Participante("Filipa Leiria", "filipa_leiria@mail.com", "a",  eventos.get(rnd.nextInt(3))));
+			criarParticipacao(new Participante("Leonilde Figueiredo", "leonilde_figueiredo@mail.com", "a",  eventos.get(rnd.nextInt(3))));
+			criarParticipacao(new Participante("Pascoal Caldeira", "pascoal_caldeira@mail.com", "a",  eventos.get(rnd.nextInt(3))));
+			criarParticipacao(new Participante("Paula Lousado", "paula_lousado@mail.com", "a",  eventos.get(rnd.nextInt(3))));
+			criarParticipacao(new Participante("Quitério Galindo","quiterio_galindo@mail.com", "a",  eventos.get(rnd.nextInt(3))));
+			criarParticipacao(new Participante("Rosa Varejão", "rosa_varejao@mail.com", "a",  eventos.get(rnd.nextInt(3))));
+			criarParticipacao(new Participante("Sonia Gabeira", "sonia_gabeira@mail.com", "a",  eventos.get(rnd.nextInt(3))));
+			criarParticipacao(new Participante("Érico Albuquerque", "erico_albuquerque@mail.com", "a",  eventos.get(rnd.nextInt(3))));
+			criarParticipacao(new Participante("Érico Albuquerque", "erico_albuquerque@mail.com", "a",  eventos.get(rnd.nextInt(3))));
+			criarParticipacao(new Participante("Tairine Reis", "tairine_reis@mail.com", "a",  eventos.get(rnd.nextInt(3))));
 		} catch (PessoaInvalidaException _) { }
 	}
 	

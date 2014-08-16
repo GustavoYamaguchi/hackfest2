@@ -10,7 +10,9 @@ import models.exceptions.PessoaInvalidaException;
 
 import org.hibernate.validator.constraints.Email;
 
+import play.data.format.Formats.NonEmpty;
 import play.data.validation.Constraints.MaxLength;
+import play.data.validation.Constraints.Required;
 
 @Entity
 public class Participante {
@@ -22,14 +24,15 @@ public class Participante {
 	@GeneratedValue
 	private long id;
 
-	@NotNull
 	@MaxLength(value = 70)
 	private String nome;
 
 	@Email
-	@NotNull
 	@MaxLength(value = 70)
 	private String email;
+	
+	@NonEmpty
+	private String senha;
 
 	@ManyToOne
 	private Evento evento;
@@ -37,8 +40,9 @@ public class Participante {
 	public Participante() {
 	}
 
-	public Participante(String nome, String email, Evento evento)
+	public Participante(String nome, String email, String senha,Evento evento)
 			throws PessoaInvalidaException {
+		setSenha(senha);
 		setNome(nome);
 		setEmail(email);
 		setEvento(evento);
@@ -78,5 +82,20 @@ public class Participante {
 		if (evento == null)
 			throw new PessoaInvalidaException("Parametro nulo");
 		this.evento = evento;
+	}
+	
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+	
+	public boolean validateLogin(String email, String senha){
+		if(email.equals(this.email) & senha.equals(this.senha)){
+			return true;
+		}
+		return false;
 	}
 }

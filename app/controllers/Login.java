@@ -6,7 +6,6 @@ import static play.data.Form.form;
 import java.util.List;
 
 import models.Participante;
-import models.Usuario;
 import models.dao.GenericDAO;
 import models.dao.GenericDAOImpl;
 import play.mvc.Controller;
@@ -18,7 +17,7 @@ import views.html.*;
 public class Login extends Controller {
 	
 	private static GenericDAO dao = new GenericDAOImpl();
-	static Form<Usuario> loginForm = form(Usuario.class).bindFromRequest();
+	private static Form<Participante> loginForm = form(Participante.class).bindFromRequest();
 
 	@Transactional
     public static Result show() {
@@ -34,29 +33,28 @@ public class Login extends Controller {
 	public static Result logout() {
 		session().clear();
 		flash("success", "Você saiu do sistema!");
-		return ok(login.render(Form.form(Usuario.class)));
+		return ok(login.render(Form.form(Participante.class)));
 	}
     
 	@Transactional
 	public static Result authenticate() {
 
-		Form<Usuario> usuarioForm = loginForm.bindFromRequest();
+		Form<Participante> participanteForm = loginForm.bindFromRequest();
+		Participante participante = participanteForm.get();
 		
-
-		if (usuarioForm.hasErrors()) {
+		if (participanteForm.hasErrors()) {
 			flash("fail", "Erro no formulário.");
         	return badRequest(login.render(loginForm));						
 		}else{
-			Usuario usuario = usuarioForm.get();
-			String email = usuario.getEmail();
-			String senha = usuario.getSenha();
+			String email = participante.getEmail();
+			String senha = participante.getSenha();
 
 	        if (!validate(email, senha)) {
 	        	flash("fail", "Email ou Senha inválida");
 	        	return badRequest(login.render(loginForm));
 	        } else {
 	        	Participante user = (Participante) dao.findByAttributeName(
-	        			"Participante", "email", usuario.getEmail()).get(0);
+	        			"Participante", "email", participante.getEmail()).get(0);
 	            session().clear();
 	            session("email", user.getEmail());
 	            return redirect(routes.Application.index());
@@ -65,12 +63,13 @@ public class Login extends Controller {
 		
     }
 	
-	private static boolean validate(String email, String senha) {
-		List<Usuario> usuarios = dao.findByAttributeName("Usuario", "email", email);
-		if (usuarios == null || usuarios.isEmpty()) {
+	public static boolean validate(String email, String senha) {
+		List<Participante> participantes = dao.findByAttributeName("Participante", "email", email);
+		Participante participante = participantes.get(0);
+		if (participantes == null || participantes.isEmpty()) {
 			return false;
 		}
-		if (!usuarios.get(0).getSenha().equals(senha)) {
+		if (!participante.getSenha().equals(senha)) {
 			return false;
 		}
 		return true;
