@@ -4,7 +4,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.validation.constraints.NotNull;
 
 import models.exceptions.PessoaInvalidaException;
 
@@ -12,23 +11,24 @@ import org.hibernate.validator.constraints.Email;
 
 import play.data.format.Formats.NonEmpty;
 import play.data.validation.Constraints.MaxLength;
-import play.data.validation.Constraints.Required;
 
 @Entity
 public class Participante {
 
-	private final String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
-			+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+	private final String EMAIL_PATTERN =  "^[a-z][a-zA-Z0-9]*$";
+	/*private final String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+			+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";*/
+	private final int MAXLENGTH = 70;
 
 	@Id
 	@GeneratedValue
 	private long id;
 
-	@MaxLength(value = 70)
+	@MaxLength(value = MAXLENGTH)
 	private String nome;
 
 	@Email
-	@MaxLength(value = 70)
+	@MaxLength(value = MAXLENGTH)
 	private String email;
 	
 	@NonEmpty
@@ -42,10 +42,10 @@ public class Participante {
 
 	public Participante(String nome, String email, String senha,Evento evento)
 			throws PessoaInvalidaException {
-		setSenha(senha);
-		setNome(nome);
-		setEmail(email);
-		setEvento(evento);
+		this.senha = senha;
+		this.nome = nome;
+		this.email = email;
+		this.evento = evento;
 	}
 
 	public String getNome() {
@@ -53,10 +53,12 @@ public class Participante {
 	}
 
 	public void setNome(String nome) throws PessoaInvalidaException {
-		if (nome == null)
+		if (nome == null){
 			throw new PessoaInvalidaException("Parametro nulo");
-		if (nome.length() > 70)
+		}
+		if (nome.length() > MAXLENGTH){
 			throw new PessoaInvalidaException("Nome longo");
+		}
 		this.nome = nome;
 	}
 
@@ -65,12 +67,15 @@ public class Participante {
 	}
 
 	public void setEmail(String email) throws PessoaInvalidaException {
-		if (email == null)
+		if (email == null){
 			throw new PessoaInvalidaException("Parametro nulo");
-		if (!email.matches(EMAIL_PATTERN))
+		}
+		if (!email.matches(EMAIL_PATTERN)){
 			throw new PessoaInvalidaException("Email inválido");
-		if (email.length() > 70)
+		}
+		if (email.length() > MAXLENGTH){
 			throw new PessoaInvalidaException("Email longo");
+		}
 		this.email = email;
 	}
 
@@ -79,8 +84,9 @@ public class Participante {
 	}
 
 	public void setEvento(Evento evento) throws PessoaInvalidaException {
-		if (evento == null)
+		if (evento == null){
 			throw new PessoaInvalidaException("Parametro nulo");
+		}
 		this.evento = evento;
 	}
 	

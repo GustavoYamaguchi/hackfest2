@@ -63,7 +63,7 @@ public class Login extends Controller {
 		
     }
 	
-	public static boolean validate(String email, String senha) {
+	private static boolean validate(String email, String senha) {
 		List<Participante> participantes = dao.findByAttributeName("Participante", "email", email);
 		Participante participante = participantes.get(0);
 		if (participantes == null || participantes.isEmpty()) {

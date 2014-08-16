@@ -37,7 +37,9 @@ public class Registro extends Controller {
                 if(!emailEmUso(participante.getEmail())){
                         return true;
                 }
-                return false;
+                else{
+                	return false;
+                }
         }
        
         private static boolean emailEmUso(String email){
@@ -45,7 +47,8 @@ public class Registro extends Controller {
                         "Participante", "email", email).get(0);
                 if(participante.getEmail().equals(email)){
                         return true;
+                }else{
+                    return false;                	
                 }
-                return false;
         }
 }
