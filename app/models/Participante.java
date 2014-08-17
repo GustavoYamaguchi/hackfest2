@@ -41,16 +41,47 @@ public class Participante {
 	}
 
 	public Participante(String nome, String email, String senha,Evento evento) throws PessoaInvalidaException{
-		setSenha(senha);
-		setNome(nome);
-		setEmail(email);
-		setEvento(evento);
+		setSenhaConstrutor(senha);
+		setNomeConstrutor(nome);
+		setEmailConstrutor(email);
+		setEventoConstrutor(evento);
 	}
 
 	public String getNome() {
 		return nome;
 	}
 
+	private void setEventoConstrutor(Evento evento) throws PessoaInvalidaException {
+		if (evento == null){
+			throw new PessoaInvalidaException("Parametro nulo");
+		}
+		this.evento = evento;
+	}
+	
+	private void setEmailConstrutor(String email) throws PessoaInvalidaException {
+		if (email == null){
+			throw new PessoaInvalidaException("Parametro nulo");
+		}
+		if (!email.matches(EMAIL_PATTERN)){
+			throw new PessoaInvalidaException("Email inválido");
+		}
+		if (email.length() > MAXLENGTH){
+			throw new PessoaInvalidaException("Email longo");
+		}
+		this.email = email;
+	}
+	private void setNomeConstrutor(String nome) throws PessoaInvalidaException {
+		if (nome == null){
+			throw new PessoaInvalidaException("Parametro nulo");
+		}
+		if (nome.length() > MAXLENGTH){
+			throw new PessoaInvalidaException("Nome longo");
+		}
+		this.nome = nome;
+	}
+	
+	
+	
 	public void setNome(String nome) throws PessoaInvalidaException {
 		if (nome == null){
 			throw new PessoaInvalidaException("Parametro nulo");
@@ -94,6 +125,9 @@ public class Participante {
 	}
 
 	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+	private void setSenhaConstrutor(String senha) {
 		this.senha = senha;
 	}
 	

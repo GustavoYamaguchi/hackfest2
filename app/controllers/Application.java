@@ -1,17 +1,9 @@
 package controllers;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-import java.util.Random;
-
 import models.Evento;
 import models.Participante;
-import models.Tema;
 import models.dao.GenericDAO;
 import models.dao.GenericDAOImpl;
-import models.exceptions.EventoInvalidoException;
-import models.exceptions.PessoaInvalidaException;
 import play.db.jpa.Transactional;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -22,8 +14,8 @@ public class Application extends Controller {
 	private static boolean criouEventosFake = false;
 	private static GenericDAO dao = new GenericDAOImpl();
 	private static Participante participante;
-	private static final int TRES = 3, DATA_SETE = 7, DATA_TRES = 3, DATA_UM = 1, DATA_DOZE = 12, DATA_DEZESSETE = 17, 
-			DATA_CINCO = 5, DATA_VINTE_UM = 21, DATA_QUINZE = 15, DATA_OITO = 8;
+	/*private static final int TRES = 3, DATA_SETE = 7, DATA_TRES = 3, DATA_UM = 1, DATA_DOZE = 12, DATA_DEZESSETE = 17, 
+			DATA_CINCO = 5, DATA_VINTE_UM = 21, DATA_QUINZE = 15, DATA_OITO = 8;*/
 
 	@Transactional
     public static Result index(){
@@ -33,9 +25,10 @@ public class Application extends Controller {
 
 			criouEventosFake = true;
 		}
-		if(session().get("email") == null){
+		if(session().get("email") == null | dao.findByAttributeName("Participante","email", session().get("email")).size() == 0){
 			return redirect(controllers.routes.Login.show());
 		}
+		System.out.println("AQUIIIIII: " + session().get("email") == null);
 		participante = (Participante) dao.findByAttributeName("Participante","email", session().get("email")).get(0);
         return ok(index.render(participante));
     }
