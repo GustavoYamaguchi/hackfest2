@@ -15,9 +15,9 @@ import play.data.validation.Constraints.MaxLength;
 @Entity
 public class Participante {
 
-	private final String EMAIL_PATTERN =  "^[a-z][a-zA-Z0-9]*$";
-	/*private final String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
-			+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";*/
+//	private final String EMAIL_PATTERN =  "^[a-z][a-zA-Z0-9]*$";
+	private final String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+			+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 	private final int MAXLENGTH = 70;
 
 	@Id
@@ -40,12 +40,11 @@ public class Participante {
 	public Participante() {
 	}
 
-	public Participante(String nome, String email, String senha,Evento evento)
-			throws PessoaInvalidaException {
-		this.senha = senha;
-		this.nome = nome;
-		this.email = email;
-		this.evento = evento;
+	public Participante(String nome, String email, String senha,Evento evento) throws PessoaInvalidaException{
+		setSenha(senha);
+		setNome(nome);
+		setEmail(email);
+		setEvento(evento);
 	}
 
 	public String getNome() {

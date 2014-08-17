@@ -17,6 +17,9 @@ POST    /eventos/:id/participar		 controllers.EventoController.participar(id: Lo
 GET     /login                           controllers.Login.show()
 POST    /login                           controllers.Login.authenticate()
 
+#Logout
+GET     /logout							 controllers.Login.logout()
+
 # Registro
 GET     /registrar                       controllers.Registro.show()
 POST    /registrar                       controllers.Registro.registrar()

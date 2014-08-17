@@ -16,8 +16,10 @@ import models.exceptions.PessoaInvalidaException;
 
 public class LoginTest extends AbstractTest {
 
+	GenericDAO dao = new GenericDAOImpl();
+	
 	@Test
-	public void test() throws PessoaInvalidaException, EventoInvalidoException {
+	public void deveAutenticarOParticipante() throws PessoaInvalidaException, EventoInvalidoException {
 			List<Tema> temas = new ArrayList<>();
 			temas.add(Tema.DESAFIOS);
 			temas.add(Tema.PROGRAMACAO);
@@ -27,7 +29,6 @@ public class LoginTest extends AbstractTest {
 			calendar.add(Calendar.MONTH, 2);
 			calendar.add(Calendar.DAY_OF_WEEK, 3);
 
-			GenericDAO dao = new GenericDAOImpl();
 			//cria evento
 			Evento e = new Evento("Luta de robos", "Robos lutando", calendar.getTime(), temas);
 			dao.persist(e);
@@ -46,18 +47,21 @@ public class LoginTest extends AbstractTest {
 			Assert.assertTrue(p2.getNome().equals("Gustavo"));
 		
 			//testa login
-			List<Participante> participantess = dao.findByAttributeName("Participante", "email", "guga@gmail.com");
-			Participante participante = participantess.get(0);
-			boolean validaAutenticacao;
-				if (participantes == null || participantes.isEmpty()) {
-					validaAutenticacao = false;
-				}
-				else if (!participante.getSenha().equals("guga")) {
-					validaAutenticacao = false;
-				}
-				else validaAutenticacao= true;
-			Assert.assertTrue(validaAutenticacao);
+			Assert.assertTrue(validate("guga@gmail.com", "guga"));
+			Assert.assertFalse(validate("a@a.com", "a"));
+			Assert.assertFalse(validate("guga@gmail.com", "guga123"));
 		
 	}
 
+	private boolean validate(String email, String senha){
+		List<Participante> participantes = dao.findByAttributeName("Participante", "email", email);
+		if (participantes == null || participantes.isEmpty()) {
+			return false;
+		}
+		Participante participante = participantes.get(0);
+		if (!participante.getSenha().equals(senha)) {
+			return false;
+		}
+		return true;
+	}
 }

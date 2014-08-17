@@ -53,10 +53,10 @@ public class Login extends Controller {
 	        	flash("fail", "Email ou Senha inválida");
 	        	return badRequest(login.render(loginForm));
 	        } else {
-	        	Participante user = (Participante) dao.findByAttributeName(
+	        	Participante p2 = (Participante) dao.findByAttributeName(
 	        			"Participante", "email", participante.getEmail()).get(0);
 	            session().clear();
-	            session("email", user.getEmail());
+	            session("email", p2.getEmail());
 	            return redirect(routes.Application.index());
 	        }
 		}
@@ -65,10 +65,10 @@ public class Login extends Controller {
 	
 	private static boolean validate(String email, String senha) {
 		List<Participante> participantes = dao.findByAttributeName("Participante", "email", email);
-		Participante participante = participantes.get(0);
 		if (participantes == null || participantes.isEmpty()) {
 			return false;
 		}
+		Participante participante = participantes.get(0);
 		if (!participante.getSenha().equals(senha)) {
 			return false;
 		}

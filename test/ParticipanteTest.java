@@ -11,6 +11,7 @@ import models.Tema;
 import models.exceptions.EventoInvalidoException;
 import models.exceptions.PessoaInvalidaException;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -42,37 +43,37 @@ public class ParticipanteTest {
 	@Test
 	public void deveOcorrerException() {
 		try {
-			new Participante("João José da Silva Maria da Penha do Ultimo Socorro Pereira Lima Roberto", "joao_jose@mail.com", "a",  evento);
+			new Participante("João José da Silva Maria da Penha do Ultimo Socorro Pereira Lima Roberto", "joao_jose@mail.com", "a", evento);
 			fail();
 		} catch (PessoaInvalidaException e) {
 			assertEquals("Nome longo", e.getMessage());
 		}
 		try {
-			new Participante("João José da Silva", "joao_jose_da_silva_maria_da_penha_do_ultimo_socorro_pereira_lima@mail.com", "a",  evento);
+			new Participante("João José da Silva", "joao_jose_da_silva_maria_da_penha_do_ultimo_socorro_pereira_lima@mail.com", "a", evento);
 			fail();
 		} catch (PessoaInvalidaException e) {
 			assertEquals("Email longo", e.getMessage());
 		}
 		try {
-			new Participante(null, "joao_jose@mail.com", "a",  evento);
+			new Participante(null, "joao_jose@mail.com", "a", evento);
 			fail();
 		} catch (PessoaInvalidaException e) {
 			assertEquals("Parametro nulo", e.getMessage());
 		}
 		try {
-			new Participante("João José da Silva", null, "a",  evento);
+			new Participante("João José da Silva", null, "a", evento);
 			fail();
 		} catch (PessoaInvalidaException e) {
 			assertEquals("Parametro nulo", e.getMessage());
 		}
 		try {
-			new Participante("João José da Silva", null, "a",  null);
+			new Participante("João José da Silva", null, "a", null);
 			fail();
 		} catch (PessoaInvalidaException e) {
 			assertEquals("Parametro nulo", e.getMessage());
 		}
 		try {
-			new Participante("João José da Silva", "joao_jose_mail.com", "a",  evento);
+			new Participante("João José da Silva", "joao_jose_mail.com", "a", evento);
 			fail();
 		} catch (PessoaInvalidaException e) {
 			assertEquals("Email inválido", e.getMessage());

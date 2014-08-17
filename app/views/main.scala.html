@@ -1,10 +1,11 @@
-@(title: String)(content: Html)
+@(participante: models.Participante)(content: Html)
 
 <!DOCTYPE html>
 
 <html>
     <head>
-        <title>@title</title>
+        <title>CCFest</title>
+        <h5></h5>
         <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
         <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/bootstrap-theme.min.css")">
         <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/bootstrap.min.css")">
@@ -22,18 +23,19 @@
     </head>
     <body>
     	<div class="container">
-			<div class="col-md-12" style="height:80px;margin-top:10px;margin-bottom:30px;border-radius:4px;opacity:.7">
+			<div class="col-md-12" style="height:80px;margin-top:10px;margin-bottom:60px;border-radius:4px;opacity:.7">
 				<div class="row">
 					<a href="#" style="color:white !important" onclick="mySwiper.swipeTo(0);">
 						<i class="fa fa-laptop col-sm-1" style="font-size:80px"></i>
-						<h1 class="col-sm-11" style="margin-top:12px;font-size:50px">&nbsp;&nbsp;&nbsp;<b>CCFest</b></h1>
+						<h1 class="col-sm-11" style="margin-top:12px;font-size:30px">&nbsp;&nbsp;&nbsp;<b>CCFest</b></h1>
+						<center><h5>Bem vindo @participante.getNome()</h5></center>
 					</a>
 					<button class="btn btn-danger btn-participar" style="float:right;" data-toggle="modal" data-target="#">Sair</button>
 				</div>
 			</div>
 		</div>
         @content
-        @modalParticipar()
+        @modalParticipar(participante)
         @modalMaisInformacoes()
         <div class='notifications top-right'></div>
     </body>
