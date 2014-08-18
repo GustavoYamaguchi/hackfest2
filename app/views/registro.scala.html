@@ -31,25 +31,28 @@
 			   		<p class="bg-danger" style="">
 			        	@flash.get("fail")
 					</p>
-					}
-					@helper.form(routes.Login.authenticate()) {
-					  	 <h1 class="text-center">Registro</h1>
-					       <p>
-						       <input type="email" name="email" placeholder="Email" value='@form("email").value'
-					                  class="form-control">
-					       </p>
-					       <p>
-						       <input type="password" name="senha" placeholder="Senha" class="form-control">
-					       </p>
-					       <p>
-						       <input type="text" name="nome" placeholder="Nome" value='@form("nome").value'
-					                  class="form-control">
-					       </p>
-					       <div>
-						       <button class="btn btn-primary" type="submit">Registrar</button>
-						       <a class="btn btn-info" style="float:right;" href="/registrar"> Cancelar </a>
-					       </div>
-					}
+			}
+			
+			@helper.form(routes.Registro.registrar()) {
+				<h1 class="text-center">Registro</h1>
+				
+				<p>
+					<input type="email" name="email" placeholder="Email" value='@form("email").value'
+						class="form-control">
+				</p>
+				<p>
+					<input type="password" name="senha" placeholder="Senha" class="form-control">
+				</p>
+				<p>
+				    <input type="text" name="nome" placeholder="Nome" value='@form("nome").value'
+                		class="form-control">
+				</p>
+				
+				<div>
+				     <button class="btn btn-primary" type="submit">Registrar</button>
+				     <a class="btn btn-primary" href="/login"> Cancelar </a>
+				</div>
+			}
 			</div>
 		</div>
 	</div>

@@ -41,7 +41,6 @@ public class Login extends Controller {
 
 		Form<Participante> participanteForm = loginForm.bindFromRequest();
 		Participante participante = participanteForm.get();
-		
 		if (participanteForm.hasErrors()) {
 			flash("fail", "Erro no formulário.");
         	return badRequest(login.render(loginForm));						

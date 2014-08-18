@@ -26,9 +26,8 @@ public class Application extends Controller {
 			criouEventosFake = true;
 		}
 		if(session().get("email") == null | dao.findByAttributeName("Participante","email", session().get("email")).size() == 0){
-			return redirect(controllers.routes.Login.show());
+			return redirect(routes.Login.show());
 		}
-		System.out.println("AQUIIIIII: " + session().get("email") == null);
 		participante = (Participante) dao.findByAttributeName("Participante","email", session().get("email")).get(0);
         return ok(index.render(participante));
     }

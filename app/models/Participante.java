@@ -8,6 +8,7 @@ import javax.persistence.ManyToOne;
 import models.exceptions.PessoaInvalidaException;
 
 import org.hibernate.validator.constraints.Email;
+import org.joda.convert.ToString;
 
 import play.data.format.Formats.NonEmpty;
 import play.data.validation.Constraints.MaxLength;
@@ -15,20 +16,19 @@ import play.data.validation.Constraints.MaxLength;
 @Entity
 public class Participante {
 
-//	private final String EMAIL_PATTERN =  "^[a-z][a-zA-Z0-9]*$";
-	private final String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+	private final String eMAILPATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
 			+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
-	private final int MAXLENGTH = 70;
+	private final int mAXLENGTH = 70;
 
 	@Id
 	@GeneratedValue
 	private long id;
 
-	@MaxLength(value = MAXLENGTH)
+	@MaxLength(value = mAXLENGTH)
 	private String nome;
 
 	@Email
-	@MaxLength(value = MAXLENGTH)
+	@MaxLength(value = mAXLENGTH)
 	private String email;
 	
 	@NonEmpty
@@ -40,6 +40,12 @@ public class Participante {
 	public Participante() {
 	}
 
+	public Participante(String nome, String email, String senha) throws PessoaInvalidaException{
+		setSenhaConstrutor(senha);
+		setNomeConstrutor(nome);
+		setEmailConstrutor(email);
+	}
+	
 	public Participante(String nome, String email, String senha,Evento evento) throws PessoaInvalidaException{
 		setSenhaConstrutor(senha);
 		setNomeConstrutor(nome);
@@ -62,10 +68,10 @@ public class Participante {
 		if (email == null){
 			throw new PessoaInvalidaException("Parametro nulo");
 		}
-		if (!email.matches(EMAIL_PATTERN)){
+		if (!email.matches(eMAILPATTERN)){
 			throw new PessoaInvalidaException("Email inválido");
 		}
-		if (email.length() > MAXLENGTH){
+		if (email.length() > mAXLENGTH){
 			throw new PessoaInvalidaException("Email longo");
 		}
 		this.email = email;
@@ -74,7 +80,7 @@ public class Participante {
 		if (nome == null){
 			throw new PessoaInvalidaException("Parametro nulo");
 		}
-		if (nome.length() > MAXLENGTH){
+		if (nome.length() > mAXLENGTH){
 			throw new PessoaInvalidaException("Nome longo");
 		}
 		this.nome = nome;
@@ -86,7 +92,7 @@ public class Participante {
 		if (nome == null){
 			throw new PessoaInvalidaException("Parametro nulo");
 		}
-		if (nome.length() > MAXLENGTH){
+		if (nome.length() > mAXLENGTH){
 			throw new PessoaInvalidaException("Nome longo");
 		}
 		this.nome = nome;
@@ -100,10 +106,10 @@ public class Participante {
 		if (email == null){
 			throw new PessoaInvalidaException("Parametro nulo");
 		}
-		if (!email.matches(EMAIL_PATTERN)){
+		if (!email.matches(eMAILPATTERN)){
 			throw new PessoaInvalidaException("Email inválido");
 		}
-		if (email.length() > MAXLENGTH){
+		if (email.length() > mAXLENGTH){
 			throw new PessoaInvalidaException("Email longo");
 		}
 		this.email = email;
@@ -136,5 +142,10 @@ public class Participante {
 			return true;
 		}
 		return false;
+	}
+	
+	@Override
+	public String toString(){
+		return "Nome: " + getNome() + "; Email: " + getEmail();
 	}
 }
