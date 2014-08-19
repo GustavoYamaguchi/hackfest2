@@ -19,7 +19,7 @@ public class LoginTest extends AbstractTest {
 	GenericDAO dao = new GenericDAOImpl();
 	
 	@Test
-	public void deveAutenticarOParticipante() throws PessoaInvalidaException, EventoInvalidoException {
+	public void deveAutenticarOParticipante() {
 			List<Tema> temas = new ArrayList<>();
 			temas.add(Tema.DESAFIOS);
 			temas.add(Tema.PROGRAMACAO);
@@ -30,15 +30,27 @@ public class LoginTest extends AbstractTest {
 			calendar.add(Calendar.DAY_OF_WEEK, 3);
 
 			//cria evento
-			Evento e = new Evento("Luta de robos", "Robos lutando", calendar.getTime(), temas);
-			dao.persist(e);
-			dao.merge(e);
-			dao.flush();
+			Evento e;
+			try {
+				e = new Evento("Luta de robos", "Robos lutando", calendar.getTime(), temas);
+				dao.persist(e);
+				dao.merge(e);
+				dao.flush();
+			} catch (EventoInvalidoException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			
 			//cria participante
-			Participante p = new Participante("Gustavo", "guga@gmail.com", "guga", e);
-			dao.persist(p);
-			dao.flush();
+			Participante p;
+			try {
+				p = new Participante("Gustavo", "guga@gmail.com", "guga");
+				dao.persist(p);
+				dao.flush();
+			} catch (PessoaInvalidaException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			List<Participante> participantes = dao.findByAttributeName("Participante", "email", "guga@gmail.com");
 			Assert.assertTrue(participantes.size() == 1);
 			Participante p2 = participantes.get(0);

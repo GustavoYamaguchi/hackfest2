@@ -29,29 +29,31 @@ public class Registro extends Controller {
             Participante participante;
             
             if (registroForm.hasErrors()) {
-            	flash("fail", "Email já está em uso");
+            	flash("fail", "Erro no formulario");
                 return badRequest(registro.render(registroForm));
-            }/*
-            else if(!validate(participante)){
-            	flash("fail", "Email já está em uso");
-                return badRequest(registroPessoa.render(registroForm));
-            }*/else {
+            }else {
             	participante = registroPessoa.bindFromRequest().get();
-                dao.persist(participante);
-                dao.flush();
-                flash("success", "Email cadastrado com sucesso.");
-                return redirect(routes.Application.index());
+            	if(!validate(participante)){
+                	flash("fail", "Email já está em uso");
+                    return badRequest(registro.render(registroForm));
+                }
+            	else{
+            		dao.persist(participante);
+                    dao.flush();
+                    flash("success", "Email cadastrado com sucesso.");
+                    return redirect(routes.Application.index());
+            	}
             }
         }
        
-       /* private static boolean validate(Participante participante) {
+        private static boolean validate(Participante participante) {
                 if(!emailEmUso(participante.getEmail())){
                         return true;
                 }
                 else{
                 	return false;
                 }
-        }*/
+        }
        
         private static boolean emailEmUso(String email){
                 List<Participante> participantes = dao.findByAttributeName(
